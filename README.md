@@ -1,1 +1,4 @@
-# Quiz Application in java
+## Quiz Application in java
+
+### Concept used
+Swing, AWT, Applets
