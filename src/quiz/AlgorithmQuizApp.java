@@ -2,23 +2,27 @@ package quiz;
 
 import java.awt.*; 
 import javax.swing.*;
+import java.awt.event.*;
 
-public class AlgorithmQuizApp extends JFrame {
+public class AlgorithmQuizApp extends JFrame implements ActionListener{
  
 	private static final long serialVersionUID = 1L;
+	
+	JButton startButton, exitButton;
+	
 	
 	AlgorithmQuizApp(){
 		setBounds(200, 100, 790, 500);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setBackground(new Color(255, 255, 255));
+		getContentPane().setBackground(new Color(246, 246, 246));
 		setLayout(null); 
 		
 //		App icon
 		ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("img/image.jpg"));
 		
 		JLabel iconLabel = new JLabel(icon);
-		iconLabel.setBounds(0, 0, 400, 450);
+		iconLabel.setBounds(0, 0, 320, 450);
 		add(iconLabel);
 		
 //		App Title
@@ -38,6 +42,7 @@ public class AlgorithmQuizApp extends JFrame {
 		descLabel.setBounds(380, 130, 400, 80);
 		descLabel.setFont(new Font("MV Boil", Font.PLAIN, 16));
 		descLabel.setForeground(new Color(1, 84, 134));
+		descLabel.setBackground(new Color(246, 246, 246));
 		add(descLabel);
 		
 //		Player Name label
@@ -52,33 +57,48 @@ public class AlgorithmQuizApp extends JFrame {
 		nameTextField.setBounds(380, 270, 250, 30);
 		nameTextField.setFont(new Font("Viner Hand ITC", Font.PLAIN, 16));
 		nameTextField.setForeground(new Color(1, 84, 134));
+		nameTextField.setBackground(new Color(246, 246, 246));
 		add(nameTextField);
 		
 //		Start Button
-		JButton startButton = new JButton("Start");
+		startButton = new JButton("Start");
 		startButton.setBounds(380, 350, 100, 35);
 		startButton.setHorizontalAlignment(JLabel.CENTER);
 		startButton.setFont(new Font("MV Boil", Font.BOLD, 18));
 		startButton.setBackground(new Color(1, 84, 134));
 		startButton.setForeground(new Color(255, 255, 255));
+		startButton.setFocusable(false); 
+		startButton.addActionListener(this);
 		add(startButton);
 
 //		Exit Button
-		JButton exitButton = new JButton("Exit");
+		exitButton = new JButton("Exit");
 		exitButton.setBounds(600, 350, 100, 35);
 		exitButton.setHorizontalAlignment(JLabel.CENTER);
 		exitButton.setFont(new Font("MV Boil", Font.BOLD, 18));
 		exitButton.setBackground(new Color(1, 84, 134));
 		exitButton.setForeground(new Color(255, 255, 255));
+		exitButton.setFocusable(false);
+		exitButton.addActionListener(this);
 		add(exitButton);
 		
 		setResizable(false);
+	} 
+	
+	public void actionPerformed(ActionEvent e) {
+ 
+		if(e.getSource() == startButton) {
+			
+		}if(e.getSource() == exitButton) {
+			System.exit(0);
+		}
+		
 	}
+
 	public static void main(String[] args) { 
 		
 		new AlgorithmQuizApp();
 		
 
-	}
-
+	} 
 }
