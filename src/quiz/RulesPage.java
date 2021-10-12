@@ -13,7 +13,7 @@ public class RulesPage extends JFrame implements ActionListener{
  
 	private static final long serialVersionUID = 1L;
 
-	JButton loginButton, startButton;
+	JButton previewButton, startButton;
 	
 	RulesPage(String userName) { 
 		setBounds(250, 100, 500, 500);
@@ -22,7 +22,7 @@ public class RulesPage extends JFrame implements ActionListener{
 		setResizable(false);
 		
 //		title of page
-		JLabel titleLabel = new JLabel("Rules of the Algoritham Quzi." + userName);
+		JLabel titleLabel = new JLabel("Rules of the Algoritham Quzi.");
 		titleLabel.setBounds(80, 30, 400, 30);
 		titleLabel.setFont(new Font("Ink Free", Font.BOLD, 25));
 		titleLabel.setForeground(new Color(1, 84, 134)); 
@@ -63,27 +63,26 @@ public class RulesPage extends JFrame implements ActionListener{
 		nameLabel.setForeground(new Color(1, 84, 134)); 
 		add(nameLabel);
 		
-//		Login button 
-		loginButton = new JButton("Login");
-		loginButton.setBounds(130, 400, 100, 35);
-		loginButton.setHorizontalAlignment(JLabel.CENTER);
-		loginButton.setFont(new Font("MV Boil", Font.BOLD, 18));
-		loginButton.setBackground(new Color(1, 84, 134));
-		loginButton.setForeground(new Color(255, 255, 255));
-		loginButton.setFocusable(false); 
-//		loginButton.addActionListener(this);
-		add(loginButton);
+//		Preview button 
+		previewButton = new JButton("Preview");
+		previewButton.setBounds(130, 400, 110, 35);
+		previewButton.setHorizontalAlignment(JLabel.CENTER);
+		previewButton.setFont(new Font("MV Boil", Font.BOLD, 18));
+		previewButton.setBackground(new Color(1, 84, 134));
+		previewButton.setForeground(new Color(255, 255, 255));
+		previewButton.setFocusable(false); 
+		previewButton.addActionListener(this);
+		add(previewButton);
 		
 //		Start button 
-		startButton = new JButton("Start");
-		startButton.setBounds(280, 400, 100, 35);
+		startButton = new JButton("Start Quiz");
+		startButton.setBounds(280, 400, 150, 35);
 		startButton.setHorizontalAlignment(JLabel.CENTER);
 		startButton.setFont(new Font("MV Boil", Font.BOLD, 18));
 		startButton.setBackground(new Color(1, 84, 134));
-		startButton.setForeground(new Color(255, 255, 255));
-//		startButton.setBorder(false);
+		startButton.setForeground(new Color(255, 255, 255)); 
 		startButton.setFocusable(false); 
-//		startBuuton.addActionListener(this);
+		startButton.addActionListener(this);
 		add(startButton);
 		
 		setVisible(true);
@@ -91,6 +90,12 @@ public class RulesPage extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		 
+		if(e.getSource() == previewButton) {
+			this.setVisible(false);
+			new AlgorithmQuizApp().setVisible(true);
+		}else if(e.getSource() == startButton) {
+			
+		}
 	} 
 	
 	public static void main(String[] args) { 
