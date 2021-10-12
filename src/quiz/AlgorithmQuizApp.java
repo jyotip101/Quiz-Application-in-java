@@ -9,7 +9,7 @@ public class AlgorithmQuizApp extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
 	JButton startButton, exitButton;
-	
+	JTextField nameTextField;
 	
 	AlgorithmQuizApp(){
 		setBounds(200, 100, 790, 500);
@@ -33,7 +33,7 @@ public class AlgorithmQuizApp extends JFrame implements ActionListener{
 		add(titleLabel);
 		
 //		App Descriptions
-		JTextArea descLabel = new JTextArea(); 
+		JTextArea descLabel = new JTextArea(1, 3); 
 		descLabel.setText( 
 			 "Hello!!, we are Algorithm Quiz App. We help to\n"
 			 + "improve your algoritham sloving techanics. "
@@ -43,6 +43,7 @@ public class AlgorithmQuizApp extends JFrame implements ActionListener{
 		descLabel.setFont(new Font("MV Boil", Font.PLAIN, 16));
 		descLabel.setForeground(new Color(1, 84, 134));
 		descLabel.setBackground(new Color(246, 246, 246));
+		descLabel.setEditable(false);
 		add(descLabel);
 		
 //		Player Name label
@@ -53,7 +54,7 @@ public class AlgorithmQuizApp extends JFrame implements ActionListener{
 		add(nameLabel);
 		
 //		Player Name text field
-		JTextField nameTextField = new JTextField();
+		nameTextField = new JTextField();
 		nameTextField.setBounds(380, 270, 250, 30);
 		nameTextField.setFont(new Font("Viner Hand ITC", Font.PLAIN, 16));
 		nameTextField.setForeground(new Color(1, 84, 134));
@@ -88,6 +89,9 @@ public class AlgorithmQuizApp extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
  
 		if(e.getSource() == startButton) {
+			String name = nameTextField.getText();
+			this.setVisible(false);
+			new RulesPage(name);
 			
 		}if(e.getSource() == exitButton) {
 			System.exit(0);

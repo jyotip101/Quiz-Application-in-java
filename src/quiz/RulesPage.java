@@ -3,30 +3,98 @@ package quiz;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import java.awt.event.*;
 
-public class RulesPage extends JFrame{
+public class RulesPage extends JFrame implements ActionListener{
  
 	private static final long serialVersionUID = 1L;
 
+	JButton loginButton, startButton;
 	
-	public RulesPage() { 
-		setBounds(250, 100, 500, 600);
+	RulesPage(String userName) { 
+		setBounds(250, 100, 500, 500);
 		getContentPane().setBackground(new Color(246, 246, 246));
 		setLayout(null);
+		setResizable(false);
 		
-		JLabel titleLabel = new JLabel("Rules of the Algoritham Quzi.");
-		titleLabel.setBounds(70, 30, 400, 30);
+//		title of page
+		JLabel titleLabel = new JLabel("Rules of the Algoritham Quzi." + userName);
+		titleLabel.setBounds(80, 30, 400, 30);
 		titleLabel.setFont(new Font("Ink Free", Font.BOLD, 25));
 		titleLabel.setForeground(new Color(1, 84, 134)); 
 		add(titleLabel);
 		
+//		Rules text 
+		JTextArea rulesText = new JTextArea( );
+		rulesText.setBounds(10, 80, 450, 200);
+		rulesText.setFont(new Font("MV Boil", Font.PLAIN, 16)); 
+		rulesText.setBackground(new Color(246, 246, 246));
+		rulesText.setForeground(new Color(1, 84, 134));  
+		rulesText.setText( 
+			"1. For this quiz, you have some knowledge about algorithams.\n"
+			+ "2. Total time to complete this quiz is 15 sec.\n"
+			+ "3. Total number of qustions are 5.\n\n"
+			+ "  Next - For going to logIn page.\n\n"
+			+ "  Preview - For going preview questions.\n\n"
+			+ "  Submit - For sumbit the quiz."
+			
+		);
+		rulesText.setEditable(false);
+		add(rulesText);
+		
+//		note label
+		JLabel noteLabel = new JLabel();
+		noteLabel.setBounds(20, 300, 450, 30);
+		noteLabel.setFont(new Font("Ink Free", Font.BOLD, 18));
+		noteLabel.setForeground(Color.RED);
+		noteLabel.setText(
+				"Note:- If you do not submit it will submit after 15 sec."
+				);
+		add(noteLabel);
+		
+//		name of label
+		JLabel nameLabel = new JLabel("Name:  " +  userName);
+		nameLabel.setBounds(100, 330, 100, 30);
+		nameLabel.setFont(new Font("Ink Free", Font.BOLD, 18));
+		nameLabel.setForeground(new Color(1, 84, 134)); 
+		add(nameLabel);
+		
+//		Login button 
+		loginButton = new JButton("Login");
+		loginButton.setBounds(130, 400, 100, 35);
+		loginButton.setHorizontalAlignment(JLabel.CENTER);
+		loginButton.setFont(new Font("MV Boil", Font.BOLD, 18));
+		loginButton.setBackground(new Color(1, 84, 134));
+		loginButton.setForeground(new Color(255, 255, 255));
+		loginButton.setFocusable(false); 
+//		loginButton.addActionListener(this);
+		add(loginButton);
+		
+//		Start button 
+		startButton = new JButton("Start");
+		startButton.setBounds(280, 400, 100, 35);
+		startButton.setHorizontalAlignment(JLabel.CENTER);
+		startButton.setFont(new Font("MV Boil", Font.BOLD, 18));
+		startButton.setBackground(new Color(1, 84, 134));
+		startButton.setForeground(new Color(255, 255, 255));
+//		startButton.setBorder(false);
+		startButton.setFocusable(false); 
+//		startBuuton.addActionListener(this);
+		add(startButton);
+		
 		setVisible(true);
-	}
-
+	}  
+	
+	public void actionPerformed(ActionEvent e) {
+		 
+	} 
+	
 	public static void main(String[] args) { 
-		new RulesPage();
+		new RulesPage("");
 	}
-
+ 
 }
