@@ -1,18 +1,21 @@
 package quiz;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.*;
+import java.awt.event.*; 
+import javax.swing.*;
 
 public class QuizQuestions extends JFrame implements ActionListener {
  
 	private static final long serialVersionUID = 1L;
-
+	
+	JButton submitButton, previewButton, nextButton;
+	ButtonGroup options;
+	JRadioButton ans1, ans2, ans3, ans4;
+	public static int count;
+	public static int time; 
+	JLabel qLists1, qno;
+	String q[][] = new String[6][5];
+	
 	QuizQuestions() {
 		setBounds(250, 50, 900, 600);
 		getContentPane().setBackground(new Color(246, 246, 246));
@@ -26,27 +29,180 @@ public class QuizQuestions extends JFrame implements ActionListener {
 		add(iconLabel);
 		
 //		user name Title
-		JLabel nameLabel = new JLabel("Name: ");
+		JLabel nameLabel = new JLabel("Total Time:-  15 sec");
 		nameLabel.setBounds(500, 40, 300, 50);
 		nameLabel.setFont(new Font("MV Boil", Font.BOLD, 18));
 		nameLabel.setForeground(new Color(1, 84, 134));
-		add(nameLabel);
-
+		add(nameLabel); 
+		
 //		user name Title
-		JLabel timeLabel = new JLabel("Name: ");
-		timeLabel.setBounds(500, 100, 300, 50);
-		timeLabel.setFont(new Font("MV Boil", Font.BOLD, 18));
-		timeLabel.setForeground(new Color(1, 84, 134));
-		add(timeLabel);
+		qno = new JLabel("");
+		qno.setBounds(100, 250, 20, 15);
+		qno.setFont(new Font("MV Boil", Font.BOLD, 16));
+		qno.setForeground(new Color(1, 84, 134));
+		add(qno);
+		
+		qLists1 = new JLabel("");
+		qLists1.setBounds(150, 250, 600, 20);
+		qLists1.setFont(new Font("MV Boil", Font.BOLD, 16));
+		qLists1.setForeground(new Color(1, 84, 134));
+		add(qLists1);
+		
+		
+	 	q[0][0] = "Which is used to find and fix bugs in the Java programs.?";
+        q[0][1] = "JVM";
+        q[0][2] = "JDB";
+        q[0][3] = "JDK";
+        q[0][4] = "JRE";
 	
-		setVisible(true);
+        q[1][0] = "What is the return type of the hashCode() method in the Object class?";
+        q[1][1] = "int";
+        q[1][2] = "Object";
+        q[1][3] = "long";
+        q[1][4] = "void";
+	
+        q[2][0] = "Which package contains the Random class?";
+        q[2][1] = "java.util package";
+        q[2][2] = "java.lang package";
+        q[2][3] = "java.awt package";
+        q[2][4] = "java.io package";
+	
+        q[3][0] = "An interface with no fields or methods is known as?";
+        q[3][1] = "Runnable Interface";
+        q[3][2] = "Abstract Interface";
+        q[3][3] = "Marker Interface";
+        q[3][4] = "CharSequence Interface";
+	
+	    q[4][0] = "In which memory a String is stored, when we create a string using new operator?";
+	    q[4][1] = "Stack";
+	    q[4][2] = "String memory";
+	    q[4][3] = "Random storage space";
+	    q[4][4] = "Heap memory";
+	
+        q[5][0] = "Which of the following is a marker interface?";
+        q[5][1] = "Runnable interface";
+        q[5][2] = "Remote interface";
+        q[5][3] = "Readable interface";
+        q[5][4] = "Result interface";
+		
+		
+		ans1 = new JRadioButton("");
+		ans1.setBounds(160, 300, 400, 30);
+		ans1.setFont(new Font("MV Boil", Font.PLAIN, 16));
+		ans1.setForeground(new Color(1, 84, 134));
+		ans1.setBackground(new Color(246, 246, 246)); 
+		ans1.setFocusable(false); 
+//		previewButton.addActionListener(this);
+		add(ans1);
+
+		ans2 = new JRadioButton("");
+		ans2.setBounds(160, 330, 400, 30);
+		ans2.setFont(new Font("MV Boil", Font.PLAIN, 16));
+		ans2.setBackground(new Color(246, 246, 246));
+		ans2.setForeground(new Color(1, 84, 134));
+		ans2.setFocusable(false); 
+//		previewButton.addActionListener(this);
+		add(ans2);
+
+		ans3 = new JRadioButton("");
+		ans3.setBounds(160, 360, 400, 30);
+		ans3.setFont(new Font("MV Boil", Font.PLAIN, 16));
+		ans3.setBackground(new Color(246, 246, 246));
+		ans3.setForeground(new Color(1, 84, 134));
+		ans3.setFocusable(false); 
+//		previewButton.addActionListener(this);
+		add(ans3);
+
+		ans4 = new JRadioButton("");
+		ans4.setBounds(160, 390, 400, 30);
+		ans4.setFont(new Font("MV Boil", Font.PLAIN, 16));
+		ans4.setBackground(new Color(246, 246, 246));
+		ans4.setForeground(new Color(1, 84, 134));
+		ans4.setFocusable(false); 
+//		previewButton.addActionListener(this);
+		add(ans4);
+		
+		options = new ButtonGroup();
+		options.add(ans1);
+		options.add(ans2);
+		options.add(ans3);
+		options.add(ans4);
+		
+
+//		Preview button 
+		previewButton = new JButton("Preview");
+		previewButton.setBounds(100, 480, 110, 35);
+		previewButton.setHorizontalAlignment(JLabel.CENTER);
+		previewButton.setFont(new Font("MV Boil", Font.BOLD, 18));
+		previewButton.setBackground(new Color(1, 84, 134));
+		previewButton.setForeground(new Color(255, 255, 255));
+		previewButton.setFocusable(false); 
+		previewButton.setEnabled(false);
+		previewButton.addActionListener(this);
+		add(previewButton);
+		
+//		next button 
+		nextButton = new JButton("Next");
+		nextButton.setBounds(550, 480, 110, 35);
+		nextButton.setHorizontalAlignment(JLabel.CENTER);
+		nextButton.setFont(new Font("MV Boil", Font.BOLD, 18));
+		nextButton.setBackground(new Color(1, 84, 134));
+		nextButton.setForeground(new Color(255, 255, 255)); 
+		nextButton.setFocusable(false); 
+		nextButton.addActionListener(this);
+		add(nextButton);
+
+//		submit button 
+		submitButton = new JButton("Submit");
+		submitButton.setBounds(700, 480, 110, 35);
+		submitButton.setHorizontalAlignment(JLabel.CENTER);
+		submitButton.setFont(new Font("MV Boil", Font.BOLD, 18));
+		submitButton.setBackground(new Color(1, 84, 134));
+		submitButton.setForeground(new Color(255, 255, 255)); 
+		submitButton.setFocusable(false); 
+		submitButton.addActionListener(this);
+		add(submitButton);
+		
+		start(0);
+	}
+	 
+	public void start(int count) {
+		qno.setText("" + (count + 1) + ". ");
+		qLists1.setText(q[count][0]);
+		ans1.setText(q[count][1]);
+		ans2.setText(q[count][2]);
+		ans3.setText(q[count][3]);
+		ans4.setText(q[count][4]);
+		options.clearSelection();
+		
 	}
 	public void actionPerformed(ActionEvent e) { 
 		
-		
+		if(e.getSource() == nextButton) {
+			 repaint();
+		}
+		if(e.getSource() == submitButton) {
+			 
+		} 
+	}
+	
+	public void paint(Graphics g){
+        super.paint(g); 
+        
+        String t = "Total Time Left:- " + time; 
+		g.setFont(new Font("MV Boil", Font.BOLD, 18));
+		g.setColor(Color.RED);
+        g.drawString(t, 506, 150);
+        
+        time++;
+        
+        try {
+        	Thread.sleep(1000);
+        	repaint();
+        }catch(Exception e) {}
 	}
  
 	public static void main(String[] args) {
-		new QuizQuestions();
+		new QuizQuestions().setVisible(true);
 	}  
 }
