@@ -4,14 +4,13 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class AlgorithmQuizApp extends JFrame implements ActionListener{
- 
-	private static final long serialVersionUID = 1L;
-	
+public class JavaQuziesMain extends JFrame implements ActionListener {
+
+
 	JButton startButton, exitButton;
 	JTextField nameTextField;
 	
-	AlgorithmQuizApp(){
+	JavaQuziesMain() {
 		setBounds(200, 100, 790, 500);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,7 +25,7 @@ public class AlgorithmQuizApp extends JFrame implements ActionListener{
 		add(iconLabel);
 		
 //		App Title
-		JLabel titleLabel = new JLabel("Algoritham Quiz");
+		JLabel titleLabel = new JLabel("Java Quzies");
 		titleLabel.setBounds(280, 40, 300, 50);
 		titleLabel.setFont(new Font("Ink Free", Font.BOLD, 35));
 		titleLabel.setForeground(new Color(1, 84, 134));
@@ -35,8 +34,8 @@ public class AlgorithmQuizApp extends JFrame implements ActionListener{
 //		App Descriptions
 		JTextArea descLabel = new JTextArea(1, 3); 
 		descLabel.setText( 
-			 "Hello!!, we are Algorithm Quiz App. We help to\n"
-			 + "improve your algoritham sloving techanics. "
+			 "Hello!!, we are Java Quzies App. We are to\n"
+			 + "test your knowledge."
 			 + "\nWe will happy to have you here." 
 				);
 		descLabel.setBounds(380, 130, 400, 80);
@@ -83,9 +82,9 @@ public class AlgorithmQuizApp extends JFrame implements ActionListener{
 		exitButton.addActionListener(this);
 		add(exitButton);
 		
-		setResizable(false);
-	} 
-	
+		setResizable(false); 
+	}
+
 	public void actionPerformed(ActionEvent e) {
  
 		if(e.getSource() == startButton) {
@@ -100,9 +99,7 @@ public class AlgorithmQuizApp extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args) { 
-		
-		new AlgorithmQuizApp();
-		
+		new JavaQuziesMain();
+	}
 
-	} 
 }

@@ -8,13 +8,16 @@ public class QuizQuestions extends JFrame implements ActionListener {
  
 	private static final long serialVersionUID = 1L;
 	
-	JButton submitButton, previewButton, nextButton;
+	JButton submitButton, clearButton, nextButton;
 	ButtonGroup options;
 	JRadioButton ans1, ans2, ans3, ans4;
-	public static int count;
-	public static int time; 
+	public static int count = 0;
+	public static int time = 0; 
+	public static int score = 0; 
 	JLabel qLists1, qno;
-	String q[][] = new String[6][5];
+	String q[][] = new String[5][5];
+	String ansList[][] = new String[5][1];
+	String qAns[][] = new String[5][2];
 	
 	QuizQuestions() {
 		setBounds(250, 50, 900, 600);
@@ -78,14 +81,14 @@ public class QuizQuestions extends JFrame implements ActionListener {
 	    q[4][2] = "String memory";
 	    q[4][3] = "Random storage space";
 	    q[4][4] = "Heap memory";
-	
-        q[5][0] = "Which of the following is a marker interface?";
-        q[5][1] = "Runnable interface";
-        q[5][2] = "Remote interface";
-        q[5][3] = "Readable interface";
-        q[5][4] = "Result interface";
+	 
 		
-		
+        qAns[0][1] = "JDB";
+        qAns[1][1] = "int";
+        qAns[2][1] = "java.util package";
+        qAns[3][1] = "Marker Interface";
+        qAns[4][1] = "Heap memory"; 
+        
 		ans1 = new JRadioButton("");
 		ans1.setBounds(160, 300, 400, 30);
 		ans1.setFont(new Font("MV Boil", Font.PLAIN, 16));
@@ -118,8 +121,7 @@ public class QuizQuestions extends JFrame implements ActionListener {
 		ans4.setFont(new Font("MV Boil", Font.PLAIN, 16));
 		ans4.setBackground(new Color(246, 246, 246));
 		ans4.setForeground(new Color(1, 84, 134));
-		ans4.setFocusable(false); 
-//		previewButton.addActionListener(this);
+		ans4.setFocusable(false);  
 		add(ans4);
 		
 		options = new ButtonGroup();
@@ -128,18 +130,16 @@ public class QuizQuestions extends JFrame implements ActionListener {
 		options.add(ans3);
 		options.add(ans4);
 		
-
-//		Preview button 
-		previewButton = new JButton("Preview");
-		previewButton.setBounds(100, 480, 110, 35);
-		previewButton.setHorizontalAlignment(JLabel.CENTER);
-		previewButton.setFont(new Font("MV Boil", Font.BOLD, 18));
-		previewButton.setBackground(new Color(1, 84, 134));
-		previewButton.setForeground(new Color(255, 255, 255));
-		previewButton.setFocusable(false); 
-		previewButton.setEnabled(false);
-		previewButton.addActionListener(this);
-		add(previewButton);
+//		Clear button 
+		clearButton = new JButton("Clear");
+		clearButton.setBounds(100, 480, 110, 35);
+		clearButton.setHorizontalAlignment(JLabel.CENTER);
+		clearButton.setFont(new Font("MV Boil", Font.BOLD, 18));
+		clearButton.setBackground(new Color(1, 84, 134));
+		clearButton.setForeground(new Color(255, 255, 255)); 
+		clearButton.setFocusable(false); 
+		clearButton.addActionListener(this);
+		add(clearButton);
 		
 //		next button 
 		nextButton = new JButton("Next");
@@ -170,20 +170,52 @@ public class QuizQuestions extends JFrame implements ActionListener {
 		qno.setText("" + (count + 1) + ". ");
 		qLists1.setText(q[count][0]);
 		ans1.setText(q[count][1]);
+		ans1.setActionCommand(q[count][1]);
 		ans2.setText(q[count][2]);
+		ans2.setActionCommand(q[count][2]);
 		ans3.setText(q[count][3]);
+		ans3.setActionCommand(q[count][3]);
 		ans4.setText(q[count][4]);
+		ans4.setActionCommand(q[count][4]);
 		options.clearSelection();
 		
 	}
 	public void actionPerformed(ActionEvent e) { 
-		
+		 
 		if(e.getSource() == nextButton) {
-			 repaint();
-		}
-		if(e.getSource() == submitButton) {
+			repaint();
 			 
-		} 
+			if(options.getSelection() == null) {
+				ansList[count][0] ="";
+			}else {
+				ansList[count][0] = options.getSelection().getActionCommand();
+			} 
+			
+			count++;
+			start(count);
+		}else if(e.getSource() == clearButton) { 
+			options.clearSelection();
+		}
+ 
+		if(e.getSource() == submitButton) { 
+			if(options.getSelection() == null) {
+				ansList[count][0] ="";
+			}else {
+				ansList[count][0] = options.getSelection().getActionCommand();
+			} 
+			
+			for(int i=0; i<ansList.length; i++) {
+				if(ansList[i][0].equals(qAns[i][1])) {
+					score += 5;
+				}
+			} 
+				 
+			
+        	this.setVisible(false);  
+        	new ScoreBoard(score).setVisible(true);
+
+        	count = 0;
+			} 
 	}
 	
 	public void paint(Graphics g){
@@ -200,6 +232,22 @@ public class QuizQuestions extends JFrame implements ActionListener {
         	Thread.sleep(1000);
         	repaint();
         }catch(Exception e) {}
+        
+        if(time ==  15 ) {
+        	  
+        	this.setVisible(false);
+        	new ScoreBoard(score).setVisible(true);  
+        	time = 0; 
+        	start(0);
+		}  
+
+        if(count == 4) { 
+			nextButton.setEnabled(false);
+			submitButton.setEnabled(true);
+		}else if(count != 4) {  
+			submitButton.setEnabled(false);
+		}
+        
 	}
  
 	public static void main(String[] args) {

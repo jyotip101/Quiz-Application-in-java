@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import java.awt.event.*;
-
+  
 public class RulesPage extends JFrame implements ActionListener{
  
 	private static final long serialVersionUID = 1L;
@@ -22,7 +22,7 @@ public class RulesPage extends JFrame implements ActionListener{
 		setResizable(false);
 		
 //		title of page
-		JLabel titleLabel = new JLabel("Rules of the Algoritham Quzi.");
+		JLabel titleLabel = new JLabel("Rules of the Java Quzies.");
 		titleLabel.setBounds(80, 30, 400, 30);
 		titleLabel.setFont(new Font("Ink Free", Font.BOLD, 25));
 		titleLabel.setForeground(new Color(1, 84, 134)); 
@@ -35,11 +35,10 @@ public class RulesPage extends JFrame implements ActionListener{
 		rulesText.setBackground(new Color(246, 246, 246));
 		rulesText.setForeground(new Color(1, 84, 134));  
 		rulesText.setText( 
-			"1. For this quiz, you have some knowledge about algorithams.\n"
+			"1. For this quiz, you have some knowledge about java.\n"
 			+ "2. Total time to complete this quiz is 15 sec.\n"
 			+ "3. Total number of qustions are 5.\n\n"
-			+ "  Next - For going to logIn page.\n\n"
-			+ "  Preview - For going preview questions.\n\n"
+			+ "  Next - For going to next qustions.\n\n" 
 			+ "  Submit - For sumbit the quiz."
 			
 		);
@@ -92,9 +91,10 @@ public class RulesPage extends JFrame implements ActionListener{
 		 
 		if(e.getSource() == previewButton) {
 			this.setVisible(false);
-			new AlgorithmQuizApp().setVisible(true);
+			new JavaQuziesMain().setVisible(true);
 		}else if(e.getSource() == startButton) {
-			
+			this.setVisible(false);
+			new QuizQuestions().setVisible(true);
 		}
 	} 
 	
